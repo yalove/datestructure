@@ -14,17 +14,17 @@ typedef struct
     int listsize;
 }SqList;
 
-//(*L).elem µÈÍ¬ÓÚ L->elem
+//(*L).elem ç­‰åŒäº L->elem
 Status InitList_Sq(SqList * L)
-{   //³õÊ¼»¯¿Õ±í
-    //LÒıÓÃÒ»Æ¬ÇøÓòÀàĞÍÎªSeqList,malloc¶¯Ì¬Ôö¼ÓÇøÓò·µ»ØÒ»¸öµØÖ·£¬Õâ¸öµØÖ·±»Ç¿ÖÆ×ª»»ÎªElemtypeĞÍ£»
-    //½á¹¹LÖĞµÄelemÎªÊ×ÔªËØµÄµØÖ·¼´Ò»¸öÖ¸Õë
+{   //åˆå§‹åŒ–ç©ºè¡¨
+    //Lå¼•ç”¨ä¸€ç‰‡åŒºåŸŸç±»å‹ä¸ºSeqList,mallocåŠ¨æ€å¢åŠ åŒºåŸŸè¿”å›ä¸€ä¸ªåœ°å€ï¼Œè¿™ä¸ªåœ°å€è¢«å¼ºåˆ¶è½¬æ¢ä¸ºElemtypeå‹ï¼›
+    //ç»“æ„Lä¸­çš„elemä¸ºé¦–å…ƒç´ çš„åœ°å€å³ä¸€ä¸ªæŒ‡é’ˆ
     (*L).elem =(ElemType *)malloc(LIST_INIT_SIZE*sizeof(ElemType));
 
-    //¿´¿´LµÄÊ×µØÖ·ºÍÏÖÔÚ±£´æµÄÄÚÈİ
+    //çœ‹çœ‹Lçš„é¦–åœ°å€å’Œç°åœ¨ä¿å­˜çš„å†…å®¹
     int *z;
     z = (*L).elem;
-    printf("µØÖ·=%p , µØÖ·=%p\n",z,*z);
+    printf("åœ°å€=%p , åœ°å€=%p\n",z,*z);
 
     if(!(*L).elem)
     {
@@ -35,7 +35,7 @@ Status InitList_Sq(SqList * L)
     return 1;
 }
 
-Status Listlength_Sq(SqList L)//ÕâÀï²»ĞèÒªÒıÓÃ£¬Ö±½Ó²é¿´LºÍLµÄÔªËØ£»ÔÚĞèÒª½øĞĞ¸ü¸ÄLÖĞÔªËØÊ±×îºÃ½øĞĞÒıÓÃ
+Status Listlength_Sq(SqList L)//è¿™é‡Œä¸éœ€è¦å¼•ç”¨ï¼Œç›´æ¥æŸ¥çœ‹Lå’ŒLçš„å…ƒç´ ï¼›åœ¨éœ€è¦è¿›è¡Œæ›´æ”¹Lä¸­å…ƒç´ æ—¶æœ€å¥½è¿›è¡Œå¼•ç”¨
 {
     if(!L.elem)
     {
@@ -44,8 +44,8 @@ Status Listlength_Sq(SqList L)//ÕâÀï²»ĞèÒªÒıÓÃ£¬Ö±½Ó²é¿´LºÍLµÄÔªËØ£»ÔÚĞèÒª½øĞĞ¸ü
     printf("Listlength=%d\n",L.length);
 }
 
-Status ClearList(SqList *L)//ÕâÀï½øĞĞÒıÓÃ£¬Èç¹û²»ÒıÓÃ£¬Ö»ÄÜ¸Ä±äº¯ÊıÄÚµÄlength²»ÄÜ¸Ä±äº¯ÊıÍâLµÄlength
-{   //½«lengthÖÃ0£¬elemÔªËØµÄÖµÈÔÈ»´æÔÚ£¬µ«Í¨¹ıGetElem_SqµÄ·½·¨²»ÄÜ·ÃÎÊµ½£¬Ö»ÄÜÖ±½Ó·ÃÎÊL.elem[i]
+Status ClearList(SqList *L)//è¿™é‡Œè¿›è¡Œå¼•ç”¨ï¼Œå¦‚æœä¸å¼•ç”¨ï¼Œåªèƒ½æ”¹å˜å‡½æ•°å†…çš„lengthä¸èƒ½æ”¹å˜å‡½æ•°å¤–Lçš„length
+{   //å°†lengthç½®0ï¼Œelemå…ƒç´ çš„å€¼ä»ç„¶å­˜åœ¨ï¼Œä½†é€šè¿‡GetElem_Sqçš„æ–¹æ³•ä¸èƒ½è®¿é—®åˆ°ï¼Œåªèƒ½ç›´æ¥è®¿é—®L.elem[i]
     if(!(*L).elem)
     {
         exit(0);
@@ -55,7 +55,7 @@ Status ClearList(SqList *L)//ÕâÀï½øĞĞÒıÓÃ£¬Èç¹û²»ÒıÓÃ£¬Ö»ÄÜ¸Ä±äº¯ÊıÄÚµÄlength²»Ä
 }
 
 Status DestoryList_Sq(SqList *L)
-{   //ÊÍ·ÅÄÚ´æ¿Õ¼ä£¬free(Ö¸Õë)
+{   //é‡Šæ”¾å†…å­˜ç©ºé—´ï¼Œfree(æŒ‡é’ˆ)
     free((*L).elem);
 }
 
@@ -79,7 +79,7 @@ Status GetElem_Sq(SqList L,int i)
 
 Status GetListM_Sq(SqList L)
 {
-    //È¡±íÖĞËùÓĞÔªËØ£¬ÕâÀï¿ÉÒÔ¿´¿´Ã¿¸öÔªËØµÄµØÖ·ºÍÔªËØµÄÖµ
+    //å–è¡¨ä¸­æ‰€æœ‰å…ƒç´ ï¼Œè¿™é‡Œå¯ä»¥çœ‹çœ‹æ¯ä¸ªå…ƒç´ çš„åœ°å€å’Œå…ƒç´ çš„å€¼
     if(!L.elem)
     {
         exit(0);
@@ -87,7 +87,7 @@ Status GetListM_Sq(SqList L)
     int i;
     for(i=1;i<=L.length;i++)
     {
-        printf("List[%d]=%d£¬µØÖ·=%p\n",i,L.elem[i-1],&L.elem[i-1]);
+        printf("List[%d]=%dï¼Œåœ°å€=%p\n",i,L.elem[i-1],&L.elem[i-1]);
     }
 }
 
@@ -141,7 +141,7 @@ Status ListDelete_Sq(SqList *L,int i,ElemType *e)
 
 int main()
 {
-    printf("intÀàĞÍµÄ´óĞ¡=%d\n",sizeof(int));
+    printf("intç±»å‹çš„å¤§å°=%d\n",sizeof(int));
     SqList L;
     InitList_Sq(&L);
     ListInsert_Sq(&L,1,1);

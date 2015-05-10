@@ -14,8 +14,8 @@ typedef struct node
     struct node *next;
 }LNode ,*LinkList;
 
-//´´½¨´øÍ·Ö¸Õëµ¥Á´±í
-int CreatList_L(LinkList *L,int n) //???Ö¸ÕëµÄÖ¸Õë£¿£¿£¿
+//åˆ›å»ºå¸¦å¤´æŒ‡é’ˆå•é“¾è¡¨
+int CreatList_L(LinkList *L,int n) //???æŒ‡é’ˆçš„æŒ‡é’ˆï¼Ÿï¼Ÿï¼Ÿ
 {
     (*L)=(LinkList)malloc(sizeof(LinkList));
     if(!L){
@@ -26,18 +26,18 @@ int CreatList_L(LinkList *L,int n) //???Ö¸ÕëµÄÖ¸Õë£¿£¿£¿
     for(i=n;i>0;i--){
         LinkList p =(LinkList)malloc(sizeof(LinkList));
         scanf("%i",&(p->data));
-        printf("µÚ%d¸öÔªËØÊÇ%d\n",i,p->data);
-        printf("µÚ%d¸öÔªËØµÄµØÖ·ÊÇ%p\n",i,p);
+        printf("ç¬¬%dä¸ªå…ƒç´ æ˜¯%d\n",i,p->data);
+        printf("ç¬¬%dä¸ªå…ƒç´ çš„åœ°å€æ˜¯%p\n",i,p);
         p->next = (*L)->next;
         (*L)->next =p;
     }
-    printf("LµÄµØÖ·ÊÇ%p\n",&L);
-    printf("LµÄµØÖ·ÊÇ%p\n",L);
-    printf("L->NEXTµÄµØÖ·ÊÇ%p\n",(*L)->next);
+    printf("Lçš„åœ°å€æ˜¯%p\n",&L);
+    printf("Lçš„åœ°å€æ˜¯%p\n",L);
+    printf("L->NEXTçš„åœ°å€æ˜¯%p\n",(*L)->next);
 
     return 0;
 }
-//²åÈëÔªËØ
+//æ’å…¥å…ƒç´ 
 int ListInsert_L(LinkList *L,int i,ElemType e)
 {
     if(!L) exit(OVERFLOW);
@@ -53,7 +53,7 @@ int ListInsert_L(LinkList *L,int i,ElemType e)
     s->next = p->next;
     p->next = s;
 }
-//É¾³ıÔªËØ
+//åˆ é™¤å…ƒç´ 
 int ListDelete_L(LinkList *L,int i, ElemType *e)
 {
     if(!L) exit(OVERFLOW);
@@ -71,7 +71,7 @@ int ListDelete_L(LinkList *L,int i, ElemType *e)
 
 
 }
-//»ñÈ¡±í³¤
+//è·å–è¡¨é•¿
 int GetLength_L(LinkList L)
 {
     int i=0;
@@ -80,22 +80,22 @@ int GetLength_L(LinkList L)
         p=p->next;
         i++;
     }
-    printf("±í³¤£º%d\n",i);
+    printf("è¡¨é•¿ï¼š%d\n",i);
 }
-//»ñÈ¡ËùÓĞÔªËØ
+//è·å–æ‰€æœ‰å…ƒç´ 
 int GetAllElem_L(LinkList L)
 {
-    printf("L->NEXTµÄµØÖ·ÊÇ%p\n",L->next);
+    printf("L->NEXTçš„åœ°å€æ˜¯%p\n",L->next);
     LinkList p =L->next;
     int i=1;
     while(p){
-        printf("µÚ%d¸öÔªËØÊÇ£º%d\n",i,p->data);
+        printf("ç¬¬%dä¸ªå…ƒç´ æ˜¯ï¼š%d\n",i,p->data);
         p=p->next;
         i++;
     }
 }
 
-//»ñÈ¡Ä³¸öÔªËØ
+//è·å–æŸä¸ªå…ƒç´ 
 int GetElem_L(LinkList L,int i,ElemType *e)
 {
     LinkList p=L->next;
@@ -106,7 +106,7 @@ int GetElem_L(LinkList L,int i,ElemType *e)
     }
     if(!p||j>i) return ERROR;
     *e= p->data;
-    printf("µÚ%d¸öÔªËØÊÇ%d\n",i,*e);
+    printf("ç¬¬%dä¸ªå…ƒç´ æ˜¯%d\n",i,*e);
     return *e;
 
 }
