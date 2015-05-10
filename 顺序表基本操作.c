@@ -14,7 +14,7 @@ typedef struct
     int listsize;
 }SqList;
 
-//(*L).elem 等同于 L->elem
+//(*L)『这是结构体本身』.elem 等同于 L『这是指针类型结构体』->elem
 Status InitList_Sq(SqList * L)
 {   //初始化空表
     //L引用一片区域类型为SeqList,malloc动态增加区域返回一个地址，这个地址被强制转换为Elemtype型；
@@ -182,4 +182,3 @@ int main()
  //   DestoryList_Sq(&L1);
  //   GetListM_Sq(L1);
 //}
-
