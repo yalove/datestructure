@@ -12,19 +12,22 @@ typedef struct node
     ElemType data;
     struct node *next;
 }LNode ,*LinkList;
+//LNode和Linklist都是类型，一个定义p一个定义L
+//p和L可以相互复制，但是会出现类型错误
 
-创建带头指针单链表
-逆序存储，第一个输入的数据在表末尾
+//创建带头指针单链表
+//逆序存储，第一个输入的数据在表末尾
 int CreatList_L(LinkList *L,int n) //???指针的指针？？？
 {
-    (*L)=(LinkList)malloc(sizeof(LinkList));
+    //需要对函数外的L进行赋值修改，需要引用其地址，使用指针
+    (*L)=(LinkList)malloc(sizeof(LNode));
     if(!L){
         exit(OVERFLOW);
     }
     (*L)->next = NULL;
     int i;
     for(i=n;i>0;i--){
-        LinkList p =(LinkList)malloc(sizeof(LinkList));
+        LinkList p =(LinkList)malloc(sizeof(LNode));
         scanf("%i",&(p->data));
         printf("第%d个元素是%d\n",i,p->data);
         printf("第%d个元素的地址是%p\n",i,p);
@@ -41,13 +44,13 @@ int CreatList_L(LinkList *L,int n) //???指针的指针？？？
 //顺序存储数据，第一个输入的数据中表首
 //int CreatList_L(LinkList *L,int n)
 //{
-//    (*L)=(LinkList)malloc(sizeof(LinkList));
+//    (*L)=(LinkList)malloc(sizeof(LNode));
 //    if(!L){
 //        exit(OVERFLOW);
 //    }
 //    int i;
 //    for(i=0;i<n;i++){
-//        LinkList p=(LinkList)malloc(sizeof(LinkList));
+//        LinkList p=(LinkList)malloc(sizeof(LNode));
 //        scanf("%i",&(p->data));
 //        (*L)->next = p;
 //        p->next =NULL;
@@ -67,7 +70,7 @@ int ListInsert_L(LinkList *L,int i,ElemType e)
         ++j;
     }
     if(!p||j>i-1) return ERROR;
-    LinkList s=(LinkList)malloc(sizeof(LinkList));
+    LinkList s=(LinkList)malloc(sizeof(LNode));
     s->data =e;
     s->next = p->next;
     p->next = s;
