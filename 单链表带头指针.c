@@ -5,7 +5,6 @@
 #define OVERFLOW 1
 
 
-
 typedef int ElemType ;
 
 typedef struct node
@@ -14,7 +13,8 @@ typedef struct node
     struct node *next;
 }LNode ,*LinkList;
 
-//创建带头指针单链表
+创建带头指针单链表
+逆序存储，第一个输入的数据在表末尾
 int CreatList_L(LinkList *L,int n) //???指针的指针？？？
 {
     (*L)=(LinkList)malloc(sizeof(LinkList));
@@ -37,6 +37,25 @@ int CreatList_L(LinkList *L,int n) //???指针的指针？？？
 
     return 0;
 }
+
+//顺序存储数据，第一个输入的数据中表首
+//int CreatList_L(LinkList *L,int n)
+//{
+//    (*L)=(LinkList)malloc(sizeof(LinkList));
+//    if(!L){
+//        exit(OVERFLOW);
+//    }
+//    int i;
+//    for(i=0;i<n;i++){
+//        LinkList p=(LinkList)malloc(sizeof(LinkList));
+//        scanf("%i",&(p->data));
+//        (*L)->next = p;
+//        p->next =NULL;
+//        printf("第%d个元素是:%d\n",i+1,p->data);
+//    }
+//}
+
+
 //插入元素
 int ListInsert_L(LinkList *L,int i,ElemType e)
 {
