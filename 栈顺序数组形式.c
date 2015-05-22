@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ERROR -1
-#define OVERFLOW 1
-#define true 2
-#define false -2
-#define maxsize 10
+#define ERROR -2
+#define OVERFLOW 2
+#define true 1
+#define false 0
+#define maesize 10
 
 typedef int ElemType;
 
 //顺序栈 数组的实现方式
 typedef struct
 {
-    ElemType data[maxsize];
+    ElemType data[maesize];
     int top;
 }SqStack;
 //初始化一个空栈S
@@ -31,40 +31,40 @@ int StackEmpty(SqStack S)
 }
 
 //进栈，若栈未满
-int Push(SqStack *S,ElemType X)
+int Push(SqStack *S,ElemType e)
 {
-    if(S->top==maxsize-1){
+    if(S->top==maesize-1){
         return false;
     }
-    S->data[++S->top]=X;
+    S->data[++S->top]=e;
     return true;
 }
 
 //出栈，若栈不为空
-int Pop(SqStack *S,ElemType *X)
+int Pop(SqStack *S,ElemType *e)
 {
     if(S->top==-1){
         return false;
     }
-    *X=S->data[S->top--];
+    *e=S->data[S->top--];
     return true;
 }
 
 //读栈顶元素，并返回元素
-int GetTop(SqStack S,ElemType *X)
+int GetTop(SqStack S,ElemType *e)
 {
     if(S.top==-1){
         return false;
     }
-    *X=S.data[S.top];
-    return *X;
+    *e=S.data[S.top];
+    return true;
 }
 
 
 
 int main()
 {
-    ElemType X;
+    ElemType e;
     SqStack S;
     InitStack(&S);
     StackEmpty(S);
@@ -73,8 +73,8 @@ int main()
     Push(&S,3);
     Push(&S,4);
     Push(&S,5);
-    GetTop(S,&X);
-    Pop(&S,&X);
-    GetTop(S,&X);
+    GetTop(S,&e);
+    Pop(&S,&e);
+    GetTop(S,&e);
 
 }
