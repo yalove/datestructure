@@ -49,6 +49,7 @@ int Push(SqStack *S,ElemType e)
     }
     S->top++;
     *S->top =e;
+    //e=*(S->top++);
     //printf("s->top=%d\n",*S->top);
     return true;
 }
@@ -59,6 +60,7 @@ int Pop(SqStack *S,ElemType *e)
     if(!StackEmpty(*S)){
         *e = *S->top;
         S->top--;
+        //*e =*(S->top--);
     }
     return true;
 }
