@@ -13,6 +13,7 @@ typedef struct Linknode
     ElemType data;
     struct Linknode *next;
 }Linknode,*LiStack;
+
 //初始化一个空栈S
 int InitStack(LiStack *S)
 {
@@ -40,6 +41,7 @@ int Push(LiStack *S,ElemType e)
     //printf("p->data=%d\n",p->data);
     p->next = (*S)->next;
     (*S)->next = p;
+    return true;
 }
 
 //出栈，若栈不为空
@@ -55,10 +57,16 @@ int Pop(LiStack *S,ElemType *e)
 }
 
 //读栈顶元素，并返回元素
-int GetTop(LiStack S,ElemType *e)
+int GetTop(LiStack *S,ElemType *e)
 {
-    if(S->next){
-        *e = S->next->data;
+    if(!S){
+        return ERROR;
+    }
+    else if(!(*S)->next){
+        return ERROR;
+    }
+    else{
+        *e = (*S)->next->data;
     }
     printf("top=%d\n",*e);
     printf("---------\n");
@@ -66,34 +74,35 @@ int GetTop(LiStack S,ElemType *e)
 }
 
 //销毁栈，释放栈占用的空间
-int DestoryStack(LiStack S)
+int DestoryStack(LiStack *S)
 {
     Linknode *q;
-    while(!S->next){
-        q=S->next;
-        S->next=q->next;
+    while(!(*S)->next){
+        q=(*S)->next;
+        (*S)->next=q->next;
         free(q);
     }
     free(S);
+    return true;
 }
 
 int main()
 {
     ElemType e;
-    //printf("top=%d\n",e);
+    //printf("e=%d\n",e);
     LiStack S;
     InitStack(&S);
-    GetTop(S,&e);
+    GetTop(&S,&e);
     StackEmpty(S);
     Push(&S,1);
     Push(&S,2);
     Push(&S,3);
     StackEmpty(S);
-    GetTop(S,&e);
+    GetTop(&S,&e);
     Pop(&S,&e);
     //printf("pop=%d\n",e);
-    GetTop(S,&e);
-    DestoryStack(S);
-    GetTop(S,&e);
+    GetTop(&S,&e);
+    DestoryStack(&S);
+    GetTop(&S,&e);
 
 }
