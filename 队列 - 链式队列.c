@@ -9,7 +9,7 @@
 typedef int ElemType;
 
 
-typedef struct              //链式队列结点
+typedef struct LinkNode            //链式队列结点
 {
     ElemType data;
     struct LinkNode *next;
@@ -26,6 +26,7 @@ int InitQueue(LinkQueue *Q)
 {
     Q->front=Q->rear=malloc(sizeof(LinkNode));
     Q->front->next=NULL;
+    return true;
 }
 
 //判读队空
@@ -38,20 +39,20 @@ int isEmpty(LinkQueue Q)
 //入队
 int EnQueue(LinkQueue *Q,ElemType e)
 {
-    LinkNode *p =malloc(sizeof(LinkNode));
+    LinkNode *p=malloc(sizeof(LinkNode));
     p->data =e;
     p->next =NULL;
-    //warning: assignment from incompatible pointer type [enabled by default]|
     (Q->rear)->next=p;
     Q->rear=p;
-
+    return true;
 }
 
 //出队
 int DeQueue(LinkQueue *Q,ElemType *e)
 {
+	LinkNode *p;
     if(Q->front==Q->rear) return false;
-    LinkNode *p=Q->front->next;
+    p=Q->front->next;
     *e=p->data;
     Q->front->next=p->next;
     if(Q->rear==p)
@@ -63,8 +64,9 @@ int DeQueue(LinkQueue *Q,ElemType *e)
 //获取队头元素
 int GetQT(LinkQueue Q,ElemType *e)
 {
+	LinkNode *p;
     if(Q.front==Q.rear) return false;
-    LinkNode *p =Q.front->next;
+    p =Q.front->next;
     *e=p->data;
     printf("QT=%d\n",*e);
     return true;
@@ -73,14 +75,16 @@ int GetQT(LinkQueue Q,ElemType *e)
 //获取队列所有元素
 int GetALL(LinkQueue Q)
 {
+	LinkNode *s;
     int i=0;
     LinkNode *p =Q.front->next;
     while(p!=Q.rear->next){
         printf("Q[%d]=%d\n",i,p->data);
         i++;
-        LinkNode *s=p;
+        s=p;
         p=s->next;
     }
+    return true;
 }
 int main()
 {
