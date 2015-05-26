@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define ERROR -2
 #define OVERFLOW 2
 #define true 1
@@ -81,7 +82,61 @@ int GetTop(LiStack *S,ElemType *e)
     return true;
 }
 
+//使用队列来进行层次遍历
+typedef struct LinkNode            //链式队列结点
+{
+    ElemType data;
+    struct LinkNode *next;
 
+}LinkNode;
+
+typedef struct              //链式队列
+{
+    LinkNode *front ,*rear; //队列头尾指针
+}LinkQueue;
+
+//初始化带头结点，可以统一操作，简洁方便
+int InitQueue(LinkQueue *Q)
+{
+    Q->front=Q->rear=malloc(sizeof(LinkNode));
+    Q->front->next=NULL;
+    return true;
+}
+
+//判读队空
+int QisEmpty(LinkQueue Q)
+{
+    if(Q.front==Q.rear)
+    {
+         return true;
+    }
+    return false;
+}
+
+//入队
+int EnQueue(LinkQueue *Q,ElemType e)
+{
+    LinkNode *p=malloc(sizeof(LinkNode));
+    p->data =e;
+    p->next =NULL;
+    (Q->rear)->next=p;
+    Q->rear=p;
+    return true;
+}
+
+//出队
+int DeQueue(LinkQueue *Q,ElemType *e)
+{
+	LinkNode *p;
+    if(Q->front==Q->rear) return false;
+    p=Q->front->next;
+    *e=p->data;
+    Q->front->next=p->next;
+    if(Q->rear==p)
+        Q->rear=Q->front;
+    free(p);
+    return true;
+}
 
 //创建二叉树
 //按先序顺序输入元素，空格表示空树
@@ -105,6 +160,29 @@ int CreatBiTree(BiTree *T)
     }
     return true;
 }
+
+//二叉树的建立方法二
+//这个方法不知道怎么还有点问题
+BiTree CreatBiTree2(BiTree T)
+{
+    char ch;
+    scanf("%c",&ch);
+
+    if(ch=='#')
+    {
+        T=NULL;
+    }
+    else
+    {
+        T=malloc(sizeof(BiTNode));
+        if(T==NULL) exit(ERROR);
+        T->data=ch;
+        T->lchild=CreatBiTree2(T->lchild);
+        T->rchild=CreatBiTree2(T->rchild);
+    }
+    return T;
+}
+
 
 //前序递归遍历
 int PreOrderTraverse(BiTree T)
@@ -238,6 +316,36 @@ int NoPostOrderTraverse(BiTree T)
 
 }
 
+//二叉树广度遍历--即层次遍历
+//使用队列来实现
+int TraverseBiTree(BiTree T)
+{
+    LinkQueue Q;
+    InitQueue(&Q);
+
+    BiTree tmp=T;
+    if(tmp==NULL)
+    {
+        exit(ERROR);
+    }
+    EnQueue(&Q,tmp);
+    while(QisEmpty(Q)!=true)
+    {
+        DeQueue(&Q,&tmp);
+        printf("%c",tmp->data);
+        if(tmp->lchild!=NULL)
+        {
+            EnQueue(&Q,tmp->lchild);
+        }
+        if(tmp->rchild!=NULL)
+        {
+            EnQueue(&Q,tmp->rchild);
+        }
+    }
+    return true;
+}
+
+
 int main()
 {
     BiTree T;
@@ -260,6 +368,11 @@ int main()
     printf("\n");
     printf("NoPOST--Order\n");
     NoPostOrderTraverse(T);
-
+    printf("\n");
+    printf("Traverse\n");
+    TraverseBiTree(T);
+    printf("方法2创建树\n");
+    BiTree t;
+    CreatBiTree2(t);
 
 }
