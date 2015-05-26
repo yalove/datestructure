@@ -19,14 +19,18 @@ typedef struct BiTNode
 int CreatBiTree(BiTree *T)
 {
     char ch;
-    scanf(&ch);
-    if(ch==' ') (*T)=NULL;
+    scanf("%c",&ch);
+    if(ch=='#'){
+        (*T)=NULL;
+    }
     else{
         (*T)=malloc(sizeof(BiTNode));
-        if(!(*T)) exit(OVERFLOW);
+        if((*T)==NULL){
+            exit(OVERFLOW);
+        }
         (*T)->data=ch;
-        CreatBiTree((*T)->lchild);
-        CreatBiTree((*T)->rchild);
+        CreatBiTree(&((*T)->lchild));
+        CreatBiTree(&((*T)->rchild));
     }
     return true;
 }
@@ -34,5 +38,7 @@ int CreatBiTree(BiTree *T)
 int main()
 {
     BiTree T;
+    printf("创建二叉链表，请按先序连续输入树元素\n");
     CreatBiTree(&T);
+
 }
