@@ -413,6 +413,17 @@ int NoBiTreeDeep(BiTree T)
     printf("Deep=%d\n",deep+1);
 }
 
+//查找结点
+BiTree Locate(BiTree T)
+{
+
+}
+
+//判断两棵树是否相同
+int isEqual(BiTree t1,BiTree t2)
+{
+
+}
 
 int main()
 {
