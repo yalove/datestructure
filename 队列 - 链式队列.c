@@ -32,7 +32,7 @@ int InitQueue(LinkQueue *Q)
 //判读队空
 int isEmpty(LinkQueue Q)
 {
-    if(Q.front=Q.rear) return true;
+    if(Q.front==Q.rear) return true;
     else return false;
 }
 

@@ -163,24 +163,25 @@ int CreatBiTree(BiTree *T)
 
 //二叉树的建立方法二
 //这个方法不知道怎么还有点问题
-BiTree CreatBiTree2(BiTree T)
+//问题解决。。函数调用的问题
+BiTree CreatBiTree2(BiTree t)
 {
     char ch;
     scanf("%c",&ch);
 
     if(ch=='#')
     {
-        T=NULL;
+        t=NULL;
     }
     else
     {
-        T=malloc(sizeof(BiTNode));
-        if(T==NULL) exit(ERROR);
-        T->data=ch;
-        T->lchild=CreatBiTree2(T->lchild);
-        T->rchild=CreatBiTree2(T->rchild);
+        t=malloc(sizeof(BiTNode));
+        if(t==NULL) exit(ERROR);
+        t->data=ch;
+        t->lchild=CreatBiTree2(t->lchild);
+        t->rchild=CreatBiTree2(t->rchild);
     }
-    return T;
+    return t;
 }
 
 
@@ -345,6 +346,73 @@ int TraverseBiTree(BiTree T)
     return true;
 }
 
+//二叉树的深度
+//最大层次即为深度
+//递归求深度
+int BiTreeDeep(BiTree T)
+{
+    int dept=0;
+    if(T)
+    {
+        int lchilddept=BiTreeDeep(T->lchild);
+        int rchilddept=BiTreeDeep(T->rchild);
+        dept=lchilddept>=rchilddept?(lchilddept+1):(rchilddept+1);
+    }
+    printf("D=%d\n",dept);
+    return dept;
+
+}
+
+//非递归求深度
+int NoBiTreeDeep(BiTree T)
+{
+    LinkQueue q;
+    InitQueue(&q);
+
+    BiTree tmp=T;
+    if(tmp==NULL) exit(ERROR);
+    EnQueue(&q,tmp);
+    while(QisEmpty(q)!=true)
+    {
+        DeQueue(&q,&tmp);
+        // printf("%c",tmp->data);
+        if(tmp->lchild!=NULL)
+        {
+            EnQueue(&q,tmp->lchild);
+        }
+        if(tmp->rchild!=NULL)
+        {
+            EnQueue(&q,tmp->rchild);
+        }
+    }
+    int deep=0;
+    BiTree m=tmp;
+    BiTree n=T;
+    while(m!=n)
+    {
+        EnQueue(&q,n);
+        while(QisEmpty(q)!=true)
+        {
+            DeQueue(&q,&tmp);
+            if(m==tmp->lchild||m==tmp->rchild)
+            {
+                deep++;
+                m=tmp;
+                break;
+            }
+            if(tmp->lchild!=NULL)
+            {
+                EnQueue(&q,tmp->lchild);
+            }
+            if(tmp->rchild!=NULL)
+            {
+                EnQueue(&q,tmp->rchild);
+            }
+        }
+    }
+    printf("Deep=%d\n",deep+1);
+}
+
 
 int main()
 {
@@ -371,8 +439,13 @@ int main()
     printf("\n");
     printf("Traverse\n");
     TraverseBiTree(T);
+    BiTreeDeep(T);
+    NoBiTreeDeep(T);
+
+
     printf("方法2创建树\n");
     BiTree t;
-    CreatBiTree2(t);
+    t=CreatBiTree2(t);
+    PreOrderTraverse(t);
 
 }
